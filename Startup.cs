@@ -27,7 +27,7 @@ namespace MSIT141Site
         {
             services.AddDbContext<DemoContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("NorthwindConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DemoConnection"));
             });
             services.AddControllersWithViews();
         }
