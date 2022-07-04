@@ -11,6 +11,7 @@
             <div class="form-group">
                 <label for="InputName">姓名</label>
                 <input type="text" class="form-control" id="InputName" name="name">
+                <small id="NameCheck" class="form-text text-muted">請輸入名稱</small>
             </div>
             <div class="form-group">
                 <label for="InputEmail">電子郵件</label>
@@ -31,22 +32,28 @@
 @section Scripts
 {
     <script>
-    const btnSubmit = document.querySelector('.btn');
-    const divInfo = document.querySelector('#div1');
-    btnSubmit.addEventListener('click', (evt) => {
-        evt.preventDefault(); 
+        const txtName = document.querySelector('#InputName');
+        const btnSubmit = document.querySelector('.btn');
+        const divInfo = document.querySelector('#NameCheck');
+        txtName.addEventListener('blur', ()=>{
+
+            //const xhr = new XMLHttpRequest();
+            //const formData = new FormData(document.userInfo);
+            //const data = xhr.responseText;
+            //divInfo.innerHTML = `<h3>${data}</h3>`
+
         const formData = new FormData(document.userInfo);
-         
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('load', () => {
-           
             const data = xhr.responseText;
-            
             divInfo.innerHTML = `<h3>${data}</h3>`;
         })
-        
         xhr.open('POST', '@Url.Content("~/api/index")');
         xhr.send(formData);
+        })
+        btnSubmit.addEventListener('click', (evt) => {
+        evt.preventDefault();
+
     });
     </script>
 }
