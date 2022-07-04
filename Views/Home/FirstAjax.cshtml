@@ -22,7 +22,7 @@
             divInfo.innerHTML = `<h2>${data}</h2>`;
         })
         //步驟二對伺服器端發出要求(Request)
-        xhr.open("GET", "/api/index"); 
+        xhr.open("GET", "/api/index?name=Eason&age=25"); //瀏覽器網址
         xhr.send(); 
 
     })
