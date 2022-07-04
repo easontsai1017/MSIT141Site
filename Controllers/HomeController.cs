@@ -26,6 +26,14 @@ namespace MSIT141Site.Controllers
         {
             return View();
         }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult AjaxPost()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
