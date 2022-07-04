@@ -33,6 +33,7 @@
 @section Scripts{
     <script>
         $("#buttonClick").on("click", function () {
+            
             var emp = {
                 "employees": [
                     { "name": "Tom", "workYears": 3, "salary": 35000 },
@@ -51,7 +52,8 @@
                            <td>${Emp[i].workYears}</td>
                            <td>${Emp[i].salary}</td></tr>`
             }
-            $(".td").append(td);
+            $(".td").html(td);//不會使表格重複
+            
         });
 
 
