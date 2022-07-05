@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+
+<select id="select1"></select>
+<select id="select2"></select>
+<select id="select3"></select>
+@section Scripts{
+    <script>
+
+    const selCity = document.querySelector('#select1');
+        const selDistrict = document.querySelector('#select2');
+    const selRoad = document.querySelector('#select3');
+
+    selCity.addEventListener('change', LoadDistricts);
+    selDistrict.addEventListener('change', LoadRoads);
+
+
+        //selCity=============================================
+        async function LoadCitys() {
+        const response = await fetch('@Url.Content("~/api/city")');
+        const datas = await response.json();
+        console.log(datas);
+        datas.forEach(city => {
+            const opt1 = new Option(city, city);
+            selCity.options.add(opt1);
+        })
+        LoadDistricts()
+        }
+        //selCity=============================================
+
+        //selDistrict=========================================
+        async function LoadDistricts() {
+        selDistrict.innerHTML = "";
+        cityselect = selCity.options[selCity.selectedIndex].value;
+        const response = await fetch('@Url.Content("~/api/districts")' + `?city=${cityselect}`);
+        const datas1 = await response.json();
+        //console.log(datas1);
+            datas1.forEach(districts => {
+                const opt2 = new Option(districts, districts);
+                selDistrict.options.add(opt2);
+            })
+            LoadRoads();
+        }
+        //selDistrict=========================================
+
+        //selRoad=============================================
+        async function LoadRoads() {
+            selRoad.innerHTML = "";
+
+            roadselects = selDistrict.options[selDistrict.selectedIndex].value;
+            console.log(roadselects)
+            const response = await fetch('@Url.Content("~/api/roads")' + `?district=${roadselects}`);
+            console.log(response)
+            const datas2 = await response.json();
+            console.log("測試")
+            datas2.forEach(roads => {
+                const opt3 = new Option(roads, roads);
+                console.log(opt3)
+                selRoad.options.add(opt3);
+            })
+        }
+        LoadCitys();
+        //selRoad=============================================
+
+    </script>
+}
